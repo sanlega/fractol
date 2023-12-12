@@ -6,7 +6,7 @@
 /*   By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 20:09:10 by slegaris          #+#    #+#             */
-/*   Updated: 2023/12/11 18:24:29 by slegaris         ###   ########.fr       */
+/*   Updated: 2023/12/12 20:48:00 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdio.h>
 # include <limits.h>
 # include <string.h>
-# include "/usr/local/include/mlx.h"
+# include "mlx/mlx.h"
 # include <math.h>
 
 # define WIN_WIDTH 800
