@@ -6,7 +6,7 @@
 /*   By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 20:09:10 by slegaris          #+#    #+#             */
-/*   Updated: 2023/12/12 20:48:00 by slegaris         ###   ########.fr       */
+/*   Updated: 2023/12/13 18:17:28 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,11 @@
 # include "mlx/mlx.h"
 # include <math.h>
 
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 600
+# define WIN_WIDTH 1000
+# define WIN_HEIGHT 1000
+# define MAX_ITER 100
+# define CENTER_REAL -0.75
+# define CENTER_IMAG -0.75
 
 typedef struct s_color
 {
@@ -48,6 +51,12 @@ typedef struct	s_mlx
 	void		*win;
 	t_img		img;
 }				t_mlx;
+
+typedef struct {
+    double real;
+    double imag;
+} Complex;
+
 
 // Functions //
 
