@@ -6,7 +6,7 @@
 /*   By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:43:01 by slegaris          #+#    #+#             */
-/*   Updated: 2023/12/13 18:29:20 by slegaris         ###   ########.fr       */
+/*   Updated: 2023/12/22 14:42:16 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,19 +84,19 @@ void draw_mandelbrot(t_img *img, double zoom)
     }
 }
 
-int keyhook(int keycode, t_img *img)
+int mousehook(int button, t_img *img)
 {
-    int zoom;
+    static int zoom;
 
     zoom = 500;
-    if (keycode == 4)
+    if (button == 4)
     {
-	zoom += 10;
+	zoom *= 1.1;
 	draw_mandelbrot(img, zoom);
     }
-    if (keycode == 5)
+    else if (button == 5)
     {
-	zoom -= 10;
+	zoom /= 1.1;
 	draw_mandelbrot(img, zoom);
     }
     return 1;
@@ -114,7 +114,7 @@ int	main(void)
     img.data = mlx_get_data_addr(img.img_ptr, &img.bpp, &img.size_l,
 							    &img.endian);
     draw_mandelbrot(&img, 500);
-    mlx_mouse_hook(mlx_win, keyhook, &img);
+    mlx_hook(mlx_win, 4, 0, mousehook, &img);
     mlx_put_image_to_window(mlx, mlx_win, img.img_ptr, 0, 0);
     mlx_loop(mlx);
     return 0;
