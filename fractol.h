@@ -6,7 +6,7 @@
 /*   By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 20:09:10 by slegaris          #+#    #+#             */
-/*   Updated: 2024/03/04 02:07:27 by slegaris         ###   ########.fr       */
+/*   Updated: 2024/03/04 14:39:58 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ typedef struct s_color
 	int t;
 }	t_color;
 
+typedef struct s_iter 
+{
+	int	defaultval;
+	int	value;
+}	t_iter;
+
 typedef struct s_zoom
 {
 	double	value;
@@ -59,6 +65,7 @@ typedef struct	s_mlx
 	void		*win;
 	t_img		img;
 	t_zoom		zoom;
+	t_iter		iter;
 }				t_mlx;
 
 typedef struct {
