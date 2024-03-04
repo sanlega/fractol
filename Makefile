@@ -6,7 +6,7 @@
 #    By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/20 19:57:25 by slegaris          #+#    #+#              #
-#    Updated: 2023/12/12 18:46:56 by slegaris         ###   ########.fr        #
+#    Updated: 2024/03/04 16:33:28 by slegaris         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ LIBFT_LIB = $(LIBFT)/libft.a
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -Imlx
-
+LDFLAGS = -fsanitize=address
 MINILIBX = -lmlx -framework OpenGL -framework AppKit
 
 all: $(NAME)
@@ -58,6 +58,7 @@ fclean: clean
 
 re: fclean all
 
+asan: CC += $(LDFLAGS)
 asan: CFLAGS += -fsanitize=address
 asan: CFLAGS += -g3
 asan: re

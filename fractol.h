@@ -6,7 +6,7 @@
 /*   By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 20:09:10 by slegaris          #+#    #+#             */
-/*   Updated: 2024/03/04 14:39:58 by slegaris         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:58:09 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,27 @@
 # include "mlx/mlx.h"
 # include <math.h>
 
-# define WIN_WIDTH 1000
-# define WIN_HEIGHT 1000
+# define WIN_WIDTH 800
+# define WIN_HEIGHT 800
 # define MAX_ITER 100
 # define CENTER_REAL -0.75
 # define CENTER_IMAG -0.75
+
+// KEY's MACROS
+
+# define ESC 53
+# define RESET 15
+# define IPLUS 34
+# define IMINUS 31
+# define MW_UP 4
+# define MW_DOWN 5
+# define ZOOM_IN 69
+# define ZOOM_OUT 78
+# define UP 13
+# define DOWN 1
+# define LEFT 0
+# define RIGHT 2
+
 
 typedef struct s_color
 {
