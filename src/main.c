@@ -6,7 +6,7 @@
 /*   By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:43:01 by slegaris          #+#    #+#             */
-/*   Updated: 2024/03/04 19:40:51 by slegaris         ###   ########.fr       */
+/*   Updated: 2024/03/04 23:19:43 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,8 @@ int calc_col(int iteration, t_mlx mlx_info)
     int b;
     
     if (iteration == mlx_info.iter.value) // Color del centro
-        return create_trgb(0, 58, 0, 58);
-
-    // r = (iteration * 5) % 255;
-    // g = (iteration * 10) % 255;
-    // b = (iteration * 15) % 255;
+        return create_trgb(0, mlx_info.palette.mainR, mlx_info.palette.mainG,
+			   mlx_info.palette.mainB);
     r = (iteration * mlx_info.palette.r) % 255;
     g = (iteration * mlx_info.palette.g) % 255;
     b = (iteration * mlx_info.palette.b) % 255;
@@ -100,10 +97,8 @@ void update_zoom_and_redraw(t_mlx *mlx_info, int delta)
 int zoomhook(int button, int x, int y, void *param)
 {
     t_mlx *mlx_info = (t_mlx *)param;
-
     Complex mouse_point = map_pixel_to_complex(x, y, *mlx_info);
 
-    printf("mousecode: %d\n", button);
     if (button == MW_UP)
     {
         mlx_info->zoom.value *= 1.1;
@@ -117,59 +112,18 @@ int zoomhook(int button, int x, int y, void *param)
         mlx_info->zoom.y -= (mouse_point.imag - mlx_info->zoom.y) * (1 - 1.1);
     }
     update_zoom_and_redraw(mlx_info, 0);
-    if (button == 17)
-	exit(0);
     return (0);
 }
 
 int keyhook(int key, t_mlx *mlx_info)
 {
-    printf("Key: %d\n", key);
-
-    if (key == IPLUS)
-	mlx_info->iter.value += 1;
-    if (key == IMINUS && mlx_info->iter.value > 1)
-	mlx_info->iter.value -= 1;
-    if (key == ZOOM_IN)
-    {
-        mlx_info->zoom.value *= 1.1;
-    }
-    if (key == ZOOM_OUT)
-    {
-        mlx_info->zoom.value /= 1.1;
-    }
-    if (key == W_UP || key == UP)
-    {
-	mlx_info->zoom.y -= 15 / mlx_info->zoom.value;
-    }
-    if (key == S_DOWN || key == DOWN)
-    {
-	mlx_info->zoom.y += 15 / mlx_info->zoom.value;
-    }
-    if (key == A_LEFT || key == LEFT)
-    {
-	mlx_info->zoom.x -= 15 / mlx_info->zoom.value;
-    }
-    if (key == D_RIGHT || key == RIGHT)
-    {
-	mlx_info->zoom.x += 15 / mlx_info->zoom.value;
-    }
+    iterations(key, mlx_info);
+    zoom(key, mlx_info);
+    movement(key, mlx_info);
+    colors(key, mlx_info);
+    reset(key, mlx_info);
+    escape(key);
     update_zoom_and_redraw(mlx_info, 0);
-    if (key == RESET)
-    {
-	mlx_info->iter.value = 20;
-	mlx_info->zoom.value = 200;
-	mlx_info->zoom.x = 0;
-	mlx_info->zoom.y = 0;
-	update_zoom_and_redraw(mlx_info, 0);
-    }
-    if (key == ESC)
-    {
-	exit(0);
-    }
-
-    printf("Iters: %d\n", mlx_info->iter.value);
-
     return (0);
 }
 
@@ -190,20 +144,12 @@ int	main(void)
     mlx_info.img.img_ptr = mlx_new_image(mlx_info.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
     mlx_info.img.data = mlx_get_data_addr(mlx_info.img.img_ptr, &mlx_info.img.bpp, &mlx_info.img.size_l, &mlx_info.img.endian);
 
-    mlx_info.zoom.value = 200;
-    mlx_info.zoom.x = 0;
-    mlx_info.zoom.y = 0;
-    mlx_info.iter.value = 20;
-    // mlx_info.palette.r = 5;
-    // mlx_info.palette.g = 10;
-    // mlx_info.palette.b = 15;
-    defpallete(&mlx_info);
-
+    defsetup(&mlx_info);
+    mlx_hook(mlx_info.win, 17, 0, &on_destroy, &mlx_info);
     mlx_hook(mlx_info.win, 4, 0, zoomhook, &mlx_info);
     mlx_key_hook(mlx_info.win, keyhook, &mlx_info);
     draw_mandelbrot(&mlx_info.img, mlx_info);
     mlx_put_image_to_window(mlx_info.mlx_ptr, mlx_info.win, mlx_info.img.img_ptr, 0, 0);
-    mlx_hook(mlx_info.win, 17, 0, &on_destroy, &mlx_info);
     mlx_loop(mlx_info.mlx_ptr);
 
     return (0);

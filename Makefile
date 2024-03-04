@@ -6,7 +6,7 @@
 #    By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/20 19:57:25 by slegaris          #+#    #+#              #
-#    Updated: 2024/03/04 19:26:31 by slegaris         ###   ########.fr        #
+#    Updated: 2024/03/04 23:11:31 by slegaris         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,9 @@ SRC_DIR = src
 SRCS = $(SRC_DIR)/main.c\
        $(SRC_DIR)/colors.c\
        $(SRC_DIR)/defaults.c\
+       $(SRC_DIR)/keys.c\
+       $(SRC_DIR)/presets.c\
+       $(SRC_DIR)/palette.c\
 	   
 OBJS = $(SRCS:.c=.o)
 

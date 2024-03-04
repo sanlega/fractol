@@ -6,7 +6,7 @@
 /*   By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 20:09:10 by slegaris          #+#    #+#             */
-/*   Updated: 2024/03/04 19:42:27 by slegaris         ###   ########.fr       */
+/*   Updated: 2024/03/04 23:10:22 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ typedef struct s_palette
 	int r;
 	int g;
 	int b;
+	int mainR;
+	int mainG;
+	int mainB;
 }	t_palette;
 
 typedef struct s_iter 
@@ -109,7 +112,18 @@ typedef struct s_fractol
 }				t_fractol;
 
 // Functions //
-void	defpallete(t_mlx *mlx_info);
+void	defsetup(t_mlx *mlx_info);
+void	iterations(int key, t_mlx *mlx_info);
+void	zoom(int key, t_mlx *mlx_info);
+void	movement(int key, t_mlx *mlx_info);
+void	reset(int key, t_mlx *mlx_info);
+void	escape(int key);
+void	colors(int key, t_mlx *mlx_info);
+void	color1(int key, t_mlx *mlx_info);
+void	color2(int key, t_mlx *mlx_info);
+void	color3(int key, t_mlx *mlx_info);
+void	color4(int key, t_mlx *mlx_info);
+void	color5(int key, t_mlx *mlx_info);
 
 // Colors //
 int	create_trgb(int t, int r, int g, int b);
