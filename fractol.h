@@ -6,7 +6,7 @@
 /*   By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 20:09:10 by slegaris          #+#    #+#             */
-/*   Updated: 2024/03/04 17:26:10 by slegaris         ###   ########.fr       */
+/*   Updated: 2024/03/04 19:42:27 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,13 @@ typedef struct s_color
 	int t;
 }	t_color;
 
+typedef struct s_palette
+{
+	int r;
+	int g;
+	int b;
+}	t_palette;
+
 typedef struct s_iter 
 {
 	int	defaultval;
@@ -86,6 +93,7 @@ typedef struct	s_mlx
 	t_img		img;
 	t_zoom		zoom;
 	t_iter		iter;
+	t_palette	palette;
 }				t_mlx;
 
 typedef struct {
@@ -101,6 +109,7 @@ typedef struct s_fractol
 }				t_fractol;
 
 // Functions //
+void	defpallete(t_mlx *mlx_info);
 
 // Colors //
 int	create_trgb(int t, int r, int g, int b);

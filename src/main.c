@@ -6,23 +6,30 @@
 /*   By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:43:01 by slegaris          #+#    #+#             */
-/*   Updated: 2024/03/04 17:27:36 by slegaris         ###   ########.fr       */
+/*   Updated: 2024/03/04 19:40:51 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fractol.h"
+#include "../libft/libft.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-int calc_col(int iteration, int maxiter)
+int calc_col(int iteration, t_mlx mlx_info)
 {
-    int r, g, b;
+    int r;
+    int g;
+    int b;
+    
+    if (iteration == mlx_info.iter.value) // Color del centro
+        return create_trgb(0, 58, 0, 58);
 
-    if (iteration == maxiter)
-        return create_trgb(0, 0, 0, 0);
-    r = (iteration * 5) % 255;
-    g = (iteration * 10) % 255;
-    b = (iteration * 20) % 255;
+    // r = (iteration * 5) % 255;
+    // g = (iteration * 10) % 255;
+    // b = (iteration * 15) % 255;
+    r = (iteration * mlx_info.palette.r) % 255;
+    g = (iteration * mlx_info.palette.g) % 255;
+    b = (iteration * mlx_info.palette.b) % 255;
     return (create_trgb(0, r, g, b));
 }
 
@@ -33,11 +40,11 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-Complex map_pixel_to_complex(int x, int y, t_zoom zoom, t_zoom center)
+Complex map_pixel_to_complex(int x, int y, t_mlx mlx_info)
 {
     Complex n;
-    n.real = ((x - WIN_WIDTH / 2.0) / zoom.value)  + center.x;
-    n.imag = ((y - WIN_HEIGHT / 2.0) / zoom.value)  + center.y;
+    n.real = ((x - WIN_WIDTH / 2.0) / mlx_info.zoom.value)  + mlx_info.zoom.x;
+    n.imag = ((y - WIN_HEIGHT / 2.0) / mlx_info.zoom.value)  + mlx_info.zoom.y;
     return (n);
 }
 
@@ -60,7 +67,7 @@ int mandelbrot_iter(Complex c, int maxiter)
     return (i);
 }
 
-void draw_mandelbrot(t_img *img, t_zoom zoom, t_zoom center, t_iter iter)
+void draw_mandelbrot(t_img *img, t_mlx mlx_info)
 {
     int	    x;
     int	    y;
@@ -73,9 +80,9 @@ void draw_mandelbrot(t_img *img, t_zoom zoom, t_zoom center, t_iter iter)
 	x = 0;
 	while (x < WIN_WIDTH)
 	{
-	    c = map_pixel_to_complex(x, y, zoom, center);
-	    color = mandelbrot_iter(c, iter.value);
-	    my_mlx_pixel_put(img, x, y, calc_col(color, iter.value));
+	    c = map_pixel_to_complex(x, y, mlx_info);
+	    color = mandelbrot_iter(c, mlx_info.iter.value);
+	    my_mlx_pixel_put(img, x, y, calc_col(color, mlx_info));
 	    x++;
 	}
 	y++;
@@ -85,7 +92,7 @@ void draw_mandelbrot(t_img *img, t_zoom zoom, t_zoom center, t_iter iter)
 void update_zoom_and_redraw(t_mlx *mlx_info, int delta)
 {
     mlx_info->zoom.value += delta;
-    draw_mandelbrot(&mlx_info->img, mlx_info->zoom, mlx_info->zoom, mlx_info->iter);
+    draw_mandelbrot(&mlx_info->img, *mlx_info);
     mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win, mlx_info->img.img_ptr, 0, 0);
 }
 
@@ -94,7 +101,7 @@ int zoomhook(int button, int x, int y, void *param)
 {
     t_mlx *mlx_info = (t_mlx *)param;
 
-    Complex mouse_point = map_pixel_to_complex(x, y, mlx_info->zoom, mlx_info->zoom);
+    Complex mouse_point = map_pixel_to_complex(x, y, *mlx_info);
 
     printf("mousecode: %d\n", button);
     if (button == MW_UP)
@@ -187,10 +194,14 @@ int	main(void)
     mlx_info.zoom.x = 0;
     mlx_info.zoom.y = 0;
     mlx_info.iter.value = 20;
+    // mlx_info.palette.r = 5;
+    // mlx_info.palette.g = 10;
+    // mlx_info.palette.b = 15;
+    defpallete(&mlx_info);
 
     mlx_hook(mlx_info.win, 4, 0, zoomhook, &mlx_info);
     mlx_key_hook(mlx_info.win, keyhook, &mlx_info);
-    draw_mandelbrot(&mlx_info.img, mlx_info.zoom, mlx_info.zoom, mlx_info.iter);
+    draw_mandelbrot(&mlx_info.img, mlx_info);
     mlx_put_image_to_window(mlx_info.mlx_ptr, mlx_info.win, mlx_info.img.img_ptr, 0, 0);
     mlx_hook(mlx_info.win, 17, 0, &on_destroy, &mlx_info);
     mlx_loop(mlx_info.mlx_ptr);

@@ -6,7 +6,7 @@
 #    By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/20 19:57:25 by slegaris          #+#    #+#              #
-#    Updated: 2024/03/04 16:33:28 by slegaris         ###   ########.fr        #
+#    Updated: 2024/03/04 19:26:31 by slegaris         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRC_DIR = src
 
 SRCS = $(SRC_DIR)/main.c\
        $(SRC_DIR)/colors.c\
+       $(SRC_DIR)/defaults.c\
 	   
 OBJS = $(SRCS:.c=.o)
 
@@ -24,13 +25,14 @@ LIBFT_LIB = $(LIBFT)/libft.a
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -Imlx
-LDFLAGS = -fsanitize=address
 MINILIBX = -lmlx -framework OpenGL -framework AppKit
+
+LDFLAGS = -fsanitize=address
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+$(NAME): $(LIBFT_LIB) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT) -lft -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 	@echo "	  ██████  ██▓    ▓█████   ▄████  ▄▄▄       ██▀███   ██▓  ██████ "
 	@echo "	▒██    ▒ ▓██▒    ▓█   ▀  ██▒ ▀█▒▒████▄    ▓██ ▒ ██▒▓██▒▒██    ▒ "
 	@echo "	░ ▓██▄   ▒██░    ▒███   ▒██░▄▄▄░▒██  ▀█▄  ▓██ ░▄█ ▒▒██▒░ ▓██▄   "
