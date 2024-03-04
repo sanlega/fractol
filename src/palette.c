@@ -6,7 +6,7 @@
 /*   By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 23:09:18 by slegaris          #+#    #+#             */
-/*   Updated: 2024/03/04 23:18:23 by slegaris         ###   ########.fr       */
+/*   Updated: 2024/03/04 23:42:43 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ void	color3(int key, t_mlx *mlx_info)
 {
 	if (key == 20)
 	{
-		mlx_info->palette.r = 0;
+		mlx_info->palette.r = 15;
 		mlx_info->palette.g = 5;
-		mlx_info->palette.b = 5;
-		mlx_info->palette.mainR = 0;
-		mlx_info->palette.mainG = 50;
-		mlx_info->palette.mainB = 70;
+		mlx_info->palette.b = 10;
+		mlx_info->palette.mainR = 200;
+		mlx_info->palette.mainG = 200;
+		mlx_info->palette.mainB = 200;
 	}
 }
 
