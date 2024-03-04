@@ -6,7 +6,7 @@
 /*   By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:43:01 by slegaris          #+#    #+#             */
-/*   Updated: 2023/12/13 18:29:20 by slegaris         ###   ########.fr       */
+/*   Updated: 2024/03/04 02:14:00 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-Complex map_pixel_to_complex(int x, int y, double zoom)
+Complex map_pixel_to_complex(int x, int y, t_zoom zoom, double centerx, double centery)
 {
     Complex n;
-    n.real = (x - WIN_WIDTH / 2.0) / zoom  + CENTER_REAL;
-    n.imag = (y - WIN_HEIGHT / 2.0) / zoom  + CENTER_IMAG;
+    n.real = ((x - WIN_WIDTH / 2.0) / zoom.value)  + centerx;
+    n.imag = ((y - WIN_HEIGHT / 2.0) / zoom.value)  + centery;
     return n;
 }
 
@@ -61,7 +61,7 @@ int mandelbrot_iter(Complex c)
     return i;
 }
 
-void draw_mandelbrot(t_img *img, double zoom)
+void draw_mandelbrot(t_img *img, t_zoom zoom, t_zoom center)
 {
     int	    x;
     int	    y;
@@ -74,7 +74,7 @@ void draw_mandelbrot(t_img *img, double zoom)
 	x = 0;
 	while (x < WIN_WIDTH)
 	{
-	    c = map_pixel_to_complex(x, y, zoom);
+	    c = map_pixel_to_complex(x, y, zoom,center.x, center.y);
 	    color = mandelbrot_iter(c);
 	    // printf("Color: %d\n", color);
 	    my_mlx_pixel_put(img, x, y, calc_col(color));
@@ -84,38 +84,55 @@ void draw_mandelbrot(t_img *img, double zoom)
     }
 }
 
-int keyhook(int keycode, t_img *img)
+void update_zoom_and_redraw(t_mlx *mlx_info, int delta)
 {
-    int zoom;
-
-    zoom = 500;
-    if (keycode == 4)
-    {
-	zoom += 10;
-	draw_mandelbrot(img, zoom);
-    }
-    if (keycode == 5)
-    {
-	zoom -= 10;
-	draw_mandelbrot(img, zoom);
-    }
-    return 1;
+    mlx_info->zoom.value += delta;
+    draw_mandelbrot(&mlx_info->img, mlx_info->zoom, mlx_info->zoom);
+    mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win, mlx_info->img.img_ptr, 0, 0);
 }
 
-int	main(void)
-{
-    void	*mlx;
-    void	*mlx_win;
-    t_img	img;
 
-    mlx = mlx_init();
-    mlx_win = mlx_new_window(mlx, WIN_WIDTH, WIN_HEIGHT, "Hello world!");
-    img.img_ptr = mlx_new_image(mlx, WIN_WIDTH, WIN_HEIGHT);
-    img.data = mlx_get_data_addr(img.img_ptr, &img.bpp, &img.size_l,
-							    &img.endian);
-    draw_mandelbrot(&img, 500);
-    mlx_mouse_hook(mlx_win, keyhook, &img);
-    mlx_put_image_to_window(mlx, mlx_win, img.img_ptr, 0, 0);
-    mlx_loop(mlx);
+int zoomhook(int button, int x, int y, void *param) {
+    t_mlx *mlx_info = (t_mlx *)param;
+
+    Complex mouse_point = map_pixel_to_complex(x, y, mlx_info->zoom, mlx_info->zoom.x, mlx_info->zoom.y);
+
+    if (button == 4)
+    {
+        mlx_info->zoom.value *= 1.1;
+        mlx_info->zoom.x += (mouse_point.real - mlx_info->zoom.x) * (1 - 1 / 1.1);
+        mlx_info->zoom.y += (mouse_point.imag - mlx_info->zoom.y) * (1 - 1 / 1.1);
+    }
+    else if (button == 5)
+    {
+        mlx_info->zoom.value /= 1.1;
+        mlx_info->zoom.x -= (mouse_point.real - mlx_info->zoom.x) * (1 - 1.1);
+        mlx_info->zoom.y -= (mouse_point.imag - mlx_info->zoom.y) * (1 - 1.1);
+    }
+
+    update_zoom_and_redraw(mlx_info, 0);
+    return 0;
+}
+
+
+
+int	main(void) {
+    t_mlx	mlx_info;
+
+    mlx_info.mlx_ptr = mlx_init();
+    mlx_info.win = mlx_new_window(mlx_info.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "Mandelbrot Set");
+    mlx_info.img.img_ptr = mlx_new_image(mlx_info.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+    mlx_info.img.data = mlx_get_data_addr(mlx_info.img.img_ptr, &mlx_info.img.bpp, &mlx_info.img.size_l, &mlx_info.img.endian);
+
+    mlx_info.zoom.value = 100;
+    mlx_info.zoom.x = -0.75;
+    mlx_info.zoom.y = -0.75;
+
+    mlx_hook(mlx_info.win, 4, 0, zoomhook, &mlx_info);
+    mlx_hook(mlx_info.win, 4, 0, zoomhook, &mlx_info);
+    draw_mandelbrot(&mlx_info.img, mlx_info.zoom, mlx_info.zoom);
+    mlx_put_image_to_window(mlx_info.mlx_ptr, mlx_info.win, mlx_info.img.img_ptr, 0, 0);
+    mlx_loop(mlx_info.mlx_ptr);
+
     return 0;
 }
