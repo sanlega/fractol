@@ -6,7 +6,7 @@
 /*   By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 20:09:10 by slegaris          #+#    #+#             */
-/*   Updated: 2024/03/04 16:58:09 by slegaris         ###   ########.fr       */
+/*   Updated: 2024/03/04 17:26:10 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,14 @@
 # define MW_DOWN 5
 # define ZOOM_IN 69
 # define ZOOM_OUT 78
-# define UP 13
-# define DOWN 1
-# define LEFT 0
-# define RIGHT 2
+# define W_UP 13
+# define S_DOWN 1
+# define A_LEFT 0
+# define D_RIGHT 2
+# define UP 126
+# define DOWN 125
+# define LEFT 123
+# define RIGHT 124
 
 
 typedef struct s_color

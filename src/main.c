@@ -6,7 +6,7 @@
 /*   By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:43:01 by slegaris          #+#    #+#             */
-/*   Updated: 2024/03/04 17:18:31 by slegaris         ###   ########.fr       */
+/*   Updated: 2024/03/04 17:27:36 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,19 +131,19 @@ int keyhook(int key, t_mlx *mlx_info)
     {
         mlx_info->zoom.value /= 1.1;
     }
-    if (key == UP)
+    if (key == W_UP || key == UP)
     {
 	mlx_info->zoom.y -= 15 / mlx_info->zoom.value;
     }
-    if (key == DOWN)
+    if (key == S_DOWN || key == DOWN)
     {
 	mlx_info->zoom.y += 15 / mlx_info->zoom.value;
     }
-    if (key == LEFT)
+    if (key == A_LEFT || key == LEFT)
     {
 	mlx_info->zoom.x -= 15 / mlx_info->zoom.value;
     }
-    if (key == RIGHT)
+    if (key == D_RIGHT || key == RIGHT)
     {
 	mlx_info->zoom.x += 15 / mlx_info->zoom.value;
     }
