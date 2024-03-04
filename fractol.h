@@ -6,7 +6,7 @@
 /*   By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 20:09:10 by slegaris          #+#    #+#             */
-/*   Updated: 2024/03/04 23:10:22 by slegaris         ###   ########.fr       */
+/*   Updated: 2024/03/04 23:38:47 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,11 @@ typedef struct	s_mlx
 	t_palette	palette;
 }				t_mlx;
 
-typedef struct {
+typedef struct s_complex
+{
     double real;
     double imag;
-} Complex;
+} t_complex;
 
 
 typedef struct s_fractol

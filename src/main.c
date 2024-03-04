@@ -6,7 +6,7 @@
 /*   By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:43:01 by slegaris          #+#    #+#             */
-/*   Updated: 2024/03/04 23:19:43 by slegaris         ###   ########.fr       */
+/*   Updated: 2024/03/04 23:39:45 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,18 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-Complex map_pixel_to_complex(int x, int y, t_mlx mlx_info)
+t_complex map_pixel_to_complex(int x, int y, t_mlx mlx_info)
 {
-    Complex n;
+    t_complex n;
     n.real = ((x - WIN_WIDTH / 2.0) / mlx_info.zoom.value)  + mlx_info.zoom.x;
     n.imag = ((y - WIN_HEIGHT / 2.0) / mlx_info.zoom.value)  + mlx_info.zoom.y;
     return (n);
 }
 
-int mandelbrot_iter(Complex c, int maxiter)
+int mandelbrot_iter(t_complex c, int maxiter)
 {
     int i;
-    Complex z;
+    t_complex z;
     double temp;
 
     z.real = 0;
@@ -69,7 +69,7 @@ void draw_mandelbrot(t_img *img, t_mlx mlx_info)
     int	    x;
     int	    y;
     int	    color;
-    Complex c;
+    t_complex c;
 
     y = 0;
     while (y < WIN_HEIGHT)
@@ -97,7 +97,7 @@ void update_zoom_and_redraw(t_mlx *mlx_info, int delta)
 int zoomhook(int button, int x, int y, void *param)
 {
     t_mlx *mlx_info = (t_mlx *)param;
-    Complex mouse_point = map_pixel_to_complex(x, y, *mlx_info);
+    t_complex mouse_point = map_pixel_to_complex(x, y, *mlx_info);
 
     if (button == MW_UP)
     {
