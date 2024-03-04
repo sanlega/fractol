@@ -6,7 +6,7 @@
 /*   By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:43:01 by slegaris          #+#    #+#             */
-/*   Updated: 2024/03/04 15:33:19 by slegaris         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:36:57 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,8 @@ int keyhook(int key, t_mlx *mlx_info)
     {
 	mlx_info->iter.value = 20;
 	mlx_info->zoom.value = 200;
-	mlx_info->zoom.x = -0.5;
-	mlx_info->zoom.y = -0.5;
+	mlx_info->zoom.x = 0;
+	mlx_info->zoom.y = 0;
 	update_zoom_and_redraw(mlx_info, 0);
     }
 
@@ -146,8 +146,8 @@ int	main(void) {
     mlx_info.img.data = mlx_get_data_addr(mlx_info.img.img_ptr, &mlx_info.img.bpp, &mlx_info.img.size_l, &mlx_info.img.endian);
 
     mlx_info.zoom.value = 200;
-    mlx_info.zoom.x = -0.5;
-    mlx_info.zoom.y = -0.5;
+    mlx_info.zoom.x = 0;
+    mlx_info.zoom.y = 0;
     mlx_info.iter.value = 20;
 
     mlx_hook(mlx_info.win, 4, 0, zoomhook, &mlx_info);
