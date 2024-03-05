@@ -6,18 +6,40 @@
 /*   By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:43:11 by slegaris          #+#    #+#             */
-/*   Updated: 2024/03/05 15:05:51 by slegaris         ###   ########.fr       */
+/*   Updated: 2024/03/05 17:49:29 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fractol.h"
+#include <stdio.h>
+#include <stdlib.h>
 
+
+// int map_complex(int button, int x, int y, void *param)
+// {
+//     t_mlx *mlx_info = (t_mlx *)param;
+//     t_complex mouse_point = map_pixel_to_complex(x, y, *mlx_info);
+//
+//     printf("Button: %d\n", button);
+//     if (button == 1)
+//     {
+//         mlx_info->julia.real += mouse_point.real;
+//         mlx_info->julia.imag += mouse_point.imag;
+//     }
+//     update_zoom_and_redraw(mlx_info, 0);
+//     return (0);
+// }
 
 int zoomhook(int button, int x, int y, void *param)
 {
     t_mlx *mlx_info = (t_mlx *)param;
     t_complex mouse_point = map_pixel_to_complex(x, y, *mlx_info);
 
+    if (button == 1)
+    {
+        mlx_info->julia.real += mouse_point.real * (1 - 1 / 1.1);
+        mlx_info->julia.imag += mouse_point.imag * (1 - 1 / 1.1);
+    }
     if (button == MW_UP)
     {
         mlx_info->zoom.value *= 1.1;
@@ -46,17 +68,19 @@ int keyhook(int key, t_mlx *mlx_info)
     return (0);
 }
 
-int on_destroy(t_mlx *data)
+void    endclose(t_mlx *data)
 {
+    if (data->img.img_ptr)
+        mlx_destroy_image(data, data->img.img_ptr);
+    if (data->win)
 	mlx_destroy_window(data->mlx_ptr, data->win);
-	free(data->mlx_ptr);
-	exit(0);
-	return (0);
+    free(data->mlx_ptr);
+    exit(0);
 }
 
 void	setup_hooks(t_mlx mlx_info)
 {
-    mlx_hook(mlx_info.win, 17, 0, &on_destroy, &mlx_info);
+    mlx_hook(mlx_info.win, ON_DESTROY, 0, (void *)endclose, &mlx_info);
     mlx_hook(mlx_info.win, 4, 0, zoomhook, &mlx_info);
     mlx_key_hook(mlx_info.win, keyhook, &mlx_info);
 }
