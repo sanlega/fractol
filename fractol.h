@@ -6,7 +6,7 @@
 /*   By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 20:09:10 by slegaris          #+#    #+#             */
-/*   Updated: 2024/03/04 23:38:47 by slegaris         ###   ########.fr       */
+/*   Updated: 2024/03/05 14:52:55 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,19 +119,30 @@ void	zoom(int key, t_mlx *mlx_info);
 void	movement(int key, t_mlx *mlx_info);
 void	reset(int key, t_mlx *mlx_info);
 void	escape(int key);
+void	setup_mlx(t_mlx *mlx_info);
+void	setup_hooks(t_mlx *mlx_info);
+int	zoomhook(int button, int x, int y, void *param);
+int	keyhook(int key, t_mlx *mlx_info);
+int	on_destroy(t_mlx *data);
+void	update_zoom_and_redraw(t_mlx *mlx_info, int delta);
+t_complex map_pixel_to_complex(int x, int y, t_mlx mlx_info);
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void draw_mandelbrot(t_img *img, t_mlx mlx_info);
+int mandelbrot_iter(t_complex c, int maxiter);
+
+// Colors //
+int	calc_col(int iteration, t_mlx mlx_info);
+int	create_trgb(int t, int r, int g, int b);
+int	get_t(int trgb);
+int	get_r(int trgb);
+int	get_g(int trgb);
+int	get_b(int trgb);
 void	colors(int key, t_mlx *mlx_info);
 void	color1(int key, t_mlx *mlx_info);
 void	color2(int key, t_mlx *mlx_info);
 void	color3(int key, t_mlx *mlx_info);
 void	color4(int key, t_mlx *mlx_info);
 void	color5(int key, t_mlx *mlx_info);
-
-// Colors //
-int	create_trgb(int t, int r, int g, int b);
-int	get_t(int trgb);
-int	get_r(int trgb);
-int	get_g(int trgb);
-int	get_b(int trgb);
 
 // X //
 

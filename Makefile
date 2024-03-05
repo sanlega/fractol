@@ -6,7 +6,7 @@
 #    By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/20 19:57:25 by slegaris          #+#    #+#              #
-#    Updated: 2024/03/04 23:11:31 by slegaris         ###   ########.fr        #
+#    Updated: 2024/03/05 14:53:32 by slegaris         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,9 @@ SRCS = $(SRC_DIR)/main.c\
        $(SRC_DIR)/keys.c\
        $(SRC_DIR)/presets.c\
        $(SRC_DIR)/palette.c\
+       $(SRC_DIR)/mlx.c\
+       $(SRC_DIR)/hooks.c\
+       $(SRC_DIR)/mandelbrot.c\
 	   
 OBJS = $(SRCS:.c=.o)
 
