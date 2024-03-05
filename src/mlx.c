@@ -6,11 +6,18 @@
 /*   By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 22:36:39 by slegaris          #+#    #+#             */
-/*   Updated: 2024/03/05 14:42:21 by slegaris         ###   ########.fr       */
+/*   Updated: 2024/03/05 14:55:14 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fractol.h"
+
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
+{
+	char	*dst;
+	dst = img->data + (y * img->size_l + x * (img->bpp / 8));
+	*(unsigned int*)dst = color;
+}
 
 void	setup_mlx(t_mlx *mlx_info)
 {

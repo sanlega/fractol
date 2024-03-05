@@ -6,7 +6,7 @@
 /*   By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:43:11 by slegaris          #+#    #+#             */
-/*   Updated: 2024/03/05 14:46:00 by slegaris         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:05:51 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ int on_destroy(t_mlx *data)
 	return (0);
 }
 
-void	setup_hooks(t_mlx *mlx_info)
+void	setup_hooks(t_mlx mlx_info)
 {
-    mlx_hook(mlx_info->win, 17, 0, &on_destroy, &mlx_info);
-    mlx_hook(mlx_info->win, 4, 0, zoomhook, &mlx_info);
-    mlx_key_hook(mlx_info->win, keyhook, &mlx_info);
+    mlx_hook(mlx_info.win, 17, 0, &on_destroy, &mlx_info);
+    mlx_hook(mlx_info.win, 4, 0, zoomhook, &mlx_info);
+    mlx_key_hook(mlx_info.win, keyhook, &mlx_info);
 }
