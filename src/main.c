@@ -6,14 +6,13 @@
 /*   By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:43:01 by slegaris          #+#    #+#             */
-/*   Updated: 2024/03/05 17:53:25 by slegaris         ###   ########.fr       */
+/*   Updated: 2024/03/05 18:11:03 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fractol.h"
 #include "../libft/libft.h"
 #include <stdio.h>
-#include <stdlib.h>
 
 t_complex map_pixel_to_complex(int x, int y, t_mlx mlx_info)
 {
@@ -30,7 +29,8 @@ void update_zoom_and_redraw(t_mlx *mlx_info, int delta)
 	draw_mandelbrot(&mlx_info->img, *mlx_info);
     if (mlx_info->type.value == 1)
 	draw_julia(&mlx_info->img, mlx_info);
-    mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win,			// ABORT EN ESTA LINEA
+    if (mlx_info->mlx_ptr && mlx_info->win && mlx_info->img.img_ptr)
+	mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win,			// ABORT EN ESTA LINEA
 		    mlx_info->img.img_ptr, 0, 0);
 }
 
@@ -41,6 +41,11 @@ int	main(void)
     mlx_info.type.value = 1;
 
     setup_mlx(&mlx_info);
+
+    // printf("PTR:       %p\n", mlx_info.mlx_ptr);
+    // printf("win:       %p\n", mlx_info.win);
+    // printf("imgPTR:    %p\n", mlx_info.img.img_ptr);
+
     defsetup(&mlx_info);
     setup_hooks(mlx_info);
     if (mlx_info.type.value == 0)

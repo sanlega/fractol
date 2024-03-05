@@ -6,7 +6,7 @@
 /*   By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:43:11 by slegaris          #+#    #+#             */
-/*   Updated: 2024/03/05 17:49:29 by slegaris         ###   ########.fr       */
+/*   Updated: 2024/03/05 18:30:27 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-// int map_complex(int button, int x, int y, void *param)
-// {
-//     t_mlx *mlx_info = (t_mlx *)param;
-//     t_complex mouse_point = map_pixel_to_complex(x, y, *mlx_info);
-//
-//     printf("Button: %d\n", button);
-//     if (button == 1)
-//     {
-//         mlx_info->julia.real += mouse_point.real;
-//         mlx_info->julia.imag += mouse_point.imag;
-//     }
-//     update_zoom_and_redraw(mlx_info, 0);
-//     return (0);
-// }
-
 int zoomhook(int button, int x, int y, void *param)
 {
     t_mlx *mlx_info = (t_mlx *)param;
     t_complex mouse_point = map_pixel_to_complex(x, y, *mlx_info);
 
-    if (button == 1)
+    if (button == 1 && mlx_info->type.value == 1)
     {
-        mlx_info->julia.real += mouse_point.real * (1 - 1 / 1.1);
-        mlx_info->julia.imag += mouse_point.imag * (1 - 1 / 1.1);
+        // mlx_info->julia.real += mouse_point.real * (1 - 1 / 1.3);
+        // mlx_info->julia.imag += mouse_point.imag * (1 - 1 / 1.3);
+        mlx_info->julia.real += mouse_point.real * 0.085;
+        mlx_info->julia.imag += mouse_point.imag * 0.085;
     }
     if (button == MW_UP)
     {
