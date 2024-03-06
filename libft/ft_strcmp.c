@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 14:50:30 by slegaris          #+#    #+#             */
-/*   Updated: 2024/03/05 17:17:13 by slegaris         ###   ########.fr       */
+/*   Created: 2024/03/06 17:56:49 by slegaris          #+#    #+#             */
+/*   Updated: 2024/03/06 17:57:05 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../fractol.h"
+#include "libft.h"
 
-void update_zoom_and_redraw(t_mlx *mlx_info, int delta)
+int	ft_strcmp(char *s1, char *s2)
 {
-    mlx_info->zoom.value += delta;
-    // draw_mandelbrot(&mlx_info->img, *mlx_info);
-    draw_julia(&mlx_info->img, mlx_info);
-    mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win,
-				mlx_info->img.img_ptr, 0, 0);
+	int	i;
+
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		++i;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

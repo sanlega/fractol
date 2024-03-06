@@ -6,7 +6,7 @@
 #    By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/20 19:57:25 by slegaris          #+#    #+#              #
-#    Updated: 2024/03/05 15:49:01 by slegaris         ###   ########.fr        #
+#    Updated: 2024/03/06 17:51:20 by slegaris         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS = $(SRC_DIR)/main.c\
        $(SRC_DIR)/hooks.c\
        $(SRC_DIR)/mandelbrot.c\
        $(SRC_DIR)/julia.c\
+       $(SRC_DIR)/parse.c\
 	   
 OBJS = $(SRCS:.c=.o)
 
@@ -39,7 +40,7 @@ LDFLAGS = -fsanitize=address
 all: $(NAME)
 
 $(NAME): $(LIBFT_LIB) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT) -lft -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT) -lft $(MINILIBX) -o $(NAME)
 	@echo "	  ██████  ██▓    ▓█████   ▄████  ▄▄▄       ██▀███   ██▓  ██████ "
 	@echo "	▒██    ▒ ▓██▒    ▓█   ▀  ██▒ ▀█▒▒████▄    ▓██ ▒ ██▒▓██▒▒██    ▒ "
 	@echo "	░ ▓██▄   ▒██░    ▒███   ▒██░▄▄▄░▒██  ▀█▄  ▓██ ░▄█ ▒▒██▒░ ▓██▄   "
@@ -68,7 +69,6 @@ fclean: clean
 re: fclean all
 
 asan: CC += $(LDFLAGS)
-asan: CFLAGS += -fsanitize=address
 asan: CFLAGS += -g3
 asan: re
 

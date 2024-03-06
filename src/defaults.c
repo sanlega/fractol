@@ -6,7 +6,7 @@
 /*   By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 19:24:37 by slegaris          #+#    #+#             */
-/*   Updated: 2024/03/05 17:39:09 by slegaris         ###   ########.fr       */
+/*   Updated: 2024/03/06 19:20:25 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	defpallete(t_mlx *mlx_info)
 	mlx_info->palette.r = 15;
 	mlx_info->palette.g = 0;
 	mlx_info->palette.b = 10;
-	mlx_info->palette.mainR = 50;
-	mlx_info->palette.mainG = 0;
-	mlx_info->palette.mainB = 50;
+	mlx_info->palette.main_r = 50;
+	mlx_info->palette.main_g = 0;
+	mlx_info->palette.main_b = 50;
 }
 
 void	defiter(t_mlx *mlx_info)
@@ -40,8 +40,7 @@ void	def_complex(t_mlx *mlx_info)
 
 void	defsetup(t_mlx *mlx_info)
 {
-    defpallete(mlx_info);
-    defzoom(mlx_info);
-    defiter(mlx_info);
-	def_complex(mlx_info);
+	defpallete(mlx_info);
+	defzoom(mlx_info);
+	defiter(mlx_info);
 }

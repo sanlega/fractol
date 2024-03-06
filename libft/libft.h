@@ -6,7 +6,7 @@
 /*   By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 00:09:11 by slegaris          #+#    #+#             */
-/*   Updated: 2024/03/04 18:17:48 by slegaris         ###   ########.fr       */
+/*   Updated: 2024/03/06 18:24:26 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,7 @@ size_t				ft_intlen(int n, int sign);
 int					ft_isnumber(char *str);
 void				ptr_to_hex(void *ptr, char *str);
 int					ft_rand(int min, int max);
+int					ft_strcmp(char *s1, char *s2);
+double				ft_atof(char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 20:09:10 by slegaris          #+#    #+#             */
-/*   Updated: 2024/03/05 17:49:48 by slegaris         ###   ########.fr       */
+/*   Updated: 2024/03/06 19:19:06 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,48 +50,48 @@
 
 typedef struct s_complex
 {
-    double real;
-    double imag;
-} t_complex;
+	double	real;
+	double	imag;
+}			t_complex;
 
 typedef struct s_color
 {
 	int	r;
 	int	g;
 	int	b;
-	int t;
-}	t_color;
+	int	t;
+}		t_color;
 
 typedef struct s_palette
 {
-	int r;
-	int g;
-	int b;
-	int mainR;
-	int mainG;
-	int mainB;
-}	t_palette;
+	int	r;
+	int	g;
+	int	b;
+	int	main_r;
+	int	main_g;
+	int	main_b;
+}		t_palette;
 
-typedef struct s_iter 
+typedef struct s_iter
 {
 	int	defaultval;
 	int	value;
-}	t_iter;
+}		t_iter;
 
 typedef struct s_zoom
 {
 	double	value;
-	int	delta;
+	int		delta;
 	double	x;
 	double	y;
-}	t_zoom;
+}			t_zoom;
 
 typedef struct s_type
 {
-	int value;
-}	t_type;
+	int	value;
+}		t_type;
 
-typedef struct	s_img
+typedef struct s_img
 {
 	void		*img_ptr;
 	char		*data;
@@ -100,7 +100,7 @@ typedef struct	s_img
 	int			endian;
 }				t_img;
 
-typedef struct	s_mlx
+typedef struct s_mlx
 {
 	void		*mlx_ptr;
 	void		*win;
@@ -114,9 +114,9 @@ typedef struct	s_mlx
 
 typedef struct s_fractol
 {
-    t_mlx	mlx;
-    t_zoom	zoom;
-}				t_fractol;
+	t_mlx	mlx;
+	t_zoom	zoom;
+}			t_fractol;
 
 // Functions //
 void		defsetup(t_mlx *mlx_info);
@@ -127,31 +127,33 @@ void		reset(int key, t_mlx *mlx_info);
 void		escape(int key);
 void		setup_mlx(t_mlx *mlx_info);
 void		setup_hooks(t_mlx mlx_info);
-int		zoomhook(int button, int x, int y, void *param);
-int		keyhook(int key, t_mlx *mlx_info);
+int			zoomhook(int button, int x, int y, void *param);
+int			keyhook(int key, t_mlx *mlx_info);
 void		endclose(t_mlx *data);
 void		update_zoom_and_redraw(t_mlx *mlx_info, int delta);
 t_complex	map_pixel_to_complex(int x, int y, t_mlx mlx_info);
 void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void		draw_mandelbrot(t_img *img, t_mlx mlx_info);
-int		mandelbrot_iter(t_complex c, int maxiter);
+int			mandelbrot_iter(t_complex c, int maxiter);
 void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
-void draw_julia(t_img *img, t_mlx *mlx_info);
-int julia_iter(double x, double y, int maxiter, t_complex c);
+void		draw_julia(t_img *img, t_mlx *mlx_info);
+int			julia_iter(double x, double y, int maxiter, t_complex c);
+void		checkargs(int ac, char **av, t_mlx *mlx_info);
+void		def_complex(t_mlx *mlx_info);
 
 // Colors //
-int	calc_col(int iteration, t_mlx mlx_info);
-int	create_trgb(int t, int r, int g, int b);
-int	get_t(int trgb);
-int	get_r(int trgb);
-int	get_g(int trgb);
-int	get_b(int trgb);
-void	colors(int key, t_mlx *mlx_info);
-void	color1(int key, t_mlx *mlx_info);
-void	color2(int key, t_mlx *mlx_info);
-void	color3(int key, t_mlx *mlx_info);
-void	color4(int key, t_mlx *mlx_info);
-void	color5(int key, t_mlx *mlx_info);
+int			calc_col(int iteration, t_mlx mlx_info);
+int			create_trgb(int t, int r, int g, int b);
+int			get_t(int trgb);
+int			get_r(int trgb);
+int			get_g(int trgb);
+int			get_b(int trgb);
+void		colors(int key, t_mlx *mlx_info);
+void		color1(int key, t_mlx *mlx_info);
+void		color2(int key, t_mlx *mlx_info);
+void		color3(int key, t_mlx *mlx_info);
+void		color4(int key, t_mlx *mlx_info);
+void		color5(int key, t_mlx *mlx_info);
 
 // X //
 

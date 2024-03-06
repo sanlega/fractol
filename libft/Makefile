@@ -6,7 +6,7 @@
 #    By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/27 19:41:29 by slegaris          #+#    #+#              #
-#    Updated: 2024/03/04 18:17:27 by slegaris         ###   ########.fr        #
+#    Updated: 2024/03/06 18:24:43 by slegaris         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,8 @@ SRC =	ft_strlen.c\
 	ft_isnumber.c\
 	ptr_to_hex.c\
 	ft_rand.c\
+	ft_strcmp.c\
+	ft_atof.c\
 
 OBJ = $(SRC:.c=.o)
 
