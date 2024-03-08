@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: slegaris <slegaris@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:43:01 by slegaris          #+#    #+#             */
-/*   Updated: 2024/03/06 18:43:35 by slegaris         ###   ########.fr       */
+/*   Updated: 2024/03/08 06:06:14 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	main(int ac, char **av)
 	checkargs(ac, av, &mlx_info);
 	setup_mlx(&mlx_info);
 	defsetup(&mlx_info);
-	setup_hooks(mlx_info);
+	setup_hooks(&mlx_info);
 	if (mlx_info.type.value == 0)
 		draw_mandelbrot(&mlx_info.img, mlx_info);
 	if (mlx_info.type.value == 1)

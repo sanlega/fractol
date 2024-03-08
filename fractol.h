@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: slegaris <slegaris@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 20:09:10 by slegaris          #+#    #+#             */
-/*   Updated: 2024/03/06 19:19:06 by slegaris         ###   ########.fr       */
+/*   Updated: 2024/03/08 06:06:18 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void		movement(int key, t_mlx *mlx_info);
 void		reset(int key, t_mlx *mlx_info);
 void		escape(int key);
 void		setup_mlx(t_mlx *mlx_info);
-void		setup_hooks(t_mlx mlx_info);
+void		setup_hooks(t_mlx *mlx_info);
 int			zoomhook(int button, int x, int y, void *param);
 int			keyhook(int key, t_mlx *mlx_info);
 void		endclose(t_mlx *data);

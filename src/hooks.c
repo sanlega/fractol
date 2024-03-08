@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slegaris <slegaris@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: slegaris <slegaris@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:43:11 by slegaris          #+#    #+#             */
-/*   Updated: 2024/03/06 18:53:58 by slegaris         ###   ########.fr       */
+/*   Updated: 2024/03/08 06:08:57 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ void	endclose(t_mlx *data)
 	exit(0);
 }
 
-void	setup_hooks(t_mlx mlx_info)
+void	setup_hooks(t_mlx *mlx_info)
 {
-	mlx_hook(mlx_info.win, ON_DESTROY, 0, (void *)endclose, &mlx_info);
-	mlx_key_hook(mlx_info.win, keyhook, &mlx_info);
-	mlx_mouse_hook(mlx_info.win, zoomhook, &mlx_info);
+	mlx_hook(mlx_info->win, ON_DESTROY, 0, (void *)endclose, mlx_info);
+	mlx_key_hook(mlx_info->win, keyhook, mlx_info);
+	mlx_mouse_hook(mlx_info->win, zoomhook, mlx_info);
 }
