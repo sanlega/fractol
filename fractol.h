@@ -6,7 +6,7 @@
 /*   By: slegaris <slegaris@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 20:09:10 by slegaris          #+#    #+#             */
-/*   Updated: 2024/03/08 06:06:18 by slegaris         ###   ########.fr       */
+/*   Updated: 2024/04/09 20:41:08 by slegaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include "mlx/mlx.h"
 # include <math.h>
 
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 800
+# define WIN_WIDTH 500
+# define WIN_HEIGHT 500
 # define MAX_ITER 100
 # define CENTER_REAL -0.75
 # define CENTER_IMAG -0.75
